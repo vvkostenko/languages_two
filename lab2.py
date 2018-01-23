@@ -15,7 +15,11 @@ class IPAddr:
         return hash(self.ip_addr_str)
 
     def __lt__(self, other):
-        return int(self.blocks[2]) < int(other.blocks[2])
+        return ((self.blocks[0] != other.blocks[0]) and
+                (self.blocks[1] != other.blocks[1]) and
+                (self.blocks[2] != other.blocks[2]) and
+                (self.blocks[3] < other.blocks[3]))
+
 
 # Регулярка для нахождения всех ip
 ip_regex_pattern = re.compile(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
