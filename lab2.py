@@ -15,10 +15,26 @@ class IPAddr:
         return hash(self.ip_addr_str)
 
     def __lt__(self, other):
-        return ((self.blocks[0] != other.blocks[0]) and
-                (self.blocks[1] != other.blocks[1]) and
-                (self.blocks[2] != other.blocks[2]) and
-                (self.blocks[3] < other.blocks[3]))
+        if self.blocks[0] < other.blocks[0]:
+            return True
+
+        elif self.blocks[0] == other.blocks[0]:
+            if self.blocks[1] < other.blocks[1]:
+                return True
+            elif self.blocks[1] == other.blocks[1]:
+                if self.blocks[2] < other.blocks[2]:
+                    return True
+                elif self.blocks[2] == other.blocks[2]:
+                    if self.blocks[3] < other.blocks[3]:
+                        return True
+                    else:
+                        return False
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
 
 
 # Регулярка для нахождения всех ip
